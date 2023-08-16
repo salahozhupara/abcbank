@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container center">
+<div class="wrapper">
+    <form action="{% url 'register' %}" method="post">
+      {% csrf_token %}
+      <h2>Register</h2>
+      <div class="input-field">
+        <input type="text" name="username" required>
+        <label>Enter your Username</label>
+      </div>
+      <div class="input-field">
+        <input type="text" name="email" required>
+        <label>Enter your email</label>
+      </div>
+      <div class="input-field">
+        <input type="password" name="password" required>
+        <label>Enter your password</label>
+      </div>
+      <div class="input-field">
+        <input type="password" name="cpassword" required>
+        <label>Confirm password</label>
+      </div>
+      {% for msg in messages %}
+        <p class="error">{{ msg }}</p>
+      {% endfor %}
+      <button type="submit">Register</button>
+      <div class="login">
+        <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

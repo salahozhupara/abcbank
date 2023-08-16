@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container center">
+<div class="wrapper">
+    <form action="{% url 'register' %}" method="post">
+      {% csrf_token %}
+      <h2>Your application is accepted</h2>
+      <a href="/">Click here to go back to the homepage</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

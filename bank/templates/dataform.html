@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container center">
+<div class="wrapper">
+    <form action="{% url 'test' %}" method="post">
+      {% csrf_token %}
+      <h2>Application</h2>
+      <div class="input-field">
+        <input type="text" name="name" required>
+        <label>Enter your Name</label>
+      </div>
+      <div class="input-field">
+        <input type="date" name="dob" required>
+        <label>Enter your DOB</label>
+      </div>
+      <div class="input-field">
+        <input type="number" name="age" required>
+        <label>Enter your Age</label>
+      </div>
+      <div class="input-field">
+        <form class="form-inline">
+          <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Gender</label>
+          <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+               <option selected>Choose...</option>
+               <option value="1">Male</option>
+               <option value="2">Female</option>
+          </select>
+      </div>
+      <div class="input-field">
+        <input type="number" name="phno" required>
+        <label>Enter your Phone Number</label>
+      </div>
+      <div class="input-field">
+        <input type="text" name="email" required>
+        <label>Enter your email</label>
+      </div>
+      <div class="input-field">
+        <input type="text" name="address" required>
+        <label>Enter your Address</label>
+      </div>
+      <div class="input-field">
+          <form class="form-inline">
+          <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Account Type </label>
+          <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+               <option selected>Choose...</option>
+               <option value="1">Savings Account</option>
+               <option value="2">Current Account</option>
+          </select>
+      </div>
+        <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+        <label class="form-check-label" style="color:white;" for="inlineCheckbox1">Debit Card</label>
+        </div>
+        <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+        <label class="form-check-label" style="color:white;" for="inlineCheckbox2">Credit Card</label>
+        </div>
+        <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+        <label class="form-check-label" style="color:white;" for="inlineCheckbox3">Cheque Book</label>
+        </div>
+        <div class="input-field">
+             <label for="category">District  </label>
+ <select id="category" onchange="populateItems()">
+        <option value="choose">Choose...</option>
+        <option value="Palakkad">Palakkad</option>
+        <option value="Ernakulam">Ernakulam</option>
+        <option value="Thrissur">Thrissur</option>
+        <option value="Kozhikode">Kozhikode</option>
+        <option value="Malappuram">Malappuram</option>
+ </select>
+        </div>
+    <div class="input-field">
+    <label for="item">Branch  </label>
+    <select id="item">
+        <!-- Options will be dynamically populated based on category selection -->
+    </select>
+
+    <script>
+        const itemsByCategory = {
+            choose: ['Choose...'],
+            Palakkad: ['Ottapalam', 'Shoranur', 'Vallapuzha', 'Pattambi', 'Kanjikode'],
+            Ernakulam: ['Aluva', 'Angamaly', 'Kochi', 'Edapally', 'Muvattupuzha'],
+            Thrissur: ['Alathur', 'Chalakudy', 'Chelakkara', 'Wadakkanchery', 'Thiruvilwamala'],
+            Kozhikode: ['Beypore', 'Perambra', 'Chelannur', 'Balusseri', 'Melady'],
+            Malappuram: ['Perinthalmanna', 'Manjeri', 'Mongam', 'Ponnani', 'Kondotty'],
+        };
+
+        function populateItems() {
+            const categoryDropdown = document.getElementById('category');
+            const itemDropdown = document.getElementById('item');
+            const selectedCategory = categoryDropdown.value;
+
+            // Clear previous items
+            itemDropdown.innerHTML = '';
+
+            // Populate items based on selected category
+            itemsByCategory[selectedCategory].forEach(item => {
+                const option = document.createElement('option');
+                option.value = item;
+                option.textContent = item;
+                itemDropdown.appendChild(option);
+            });
+        }
+
+        // Initial population on page load
+        populateItems();
+    </script>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
